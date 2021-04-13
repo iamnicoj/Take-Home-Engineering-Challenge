@@ -1,42 +1,93 @@
-# Take Home Engineering Challenge
+# Architecture solution 
 
-We are a very practical team at Microsoft and this extends to the way that we work with you to find out if this team is a great fit for you. We want you to come away with a great understanding of the work that we actually do day to day and what it is like to work with us.
+I implemented a high-quality solution deployable as a dotnet 5, c#9 WebApi that uses an Azure SQL Database as a storage backend. The API exposes a dynamic, extensible, and generic queryable mechanism that allows consumers to easily get advanced insights over data on NYC’s yellow/green cabs and for-hire vehicles, with a variety of filters (a feature that can potentially be used in any other city). I implemented a broad set of crucial production-like features, including:
 
-So instead of coding at a whiteboard with someone watching over your shoulder under high pressure, which is not a thing we often do, we instead discuss code that you have written previously when we meet.
+* Organizing the solution structure, folders, and namespaces for a
+high level of abstraction and maintainability
 
-This can be a project of your own or a substantial pull request on a third party project, but some folks have done largely private or proprietary work, and this engineering challenge is for you.
+* Decoupling inner and outer dependencies through the use of asp.net dependency injection
 
-## Guidelines
+* Decouple Controllers, Action Filters, Services, Models, DTOs,
+Enums, Repositories, Exceptions, and Telemetry Services
 
--   This is meant to be an assignment that you spend approximately three hours of dedicated, focused work. Do not feel like you need to overengineer the solution with dozens of hours to impress us. Be biased toward quality over quantity.
+* I implemented a unit-test solution to test all core services that
+process user queries, leveraging a state-of-the-art mocking in-memory database
+as an injectable repository service to completely decouple the tests from the
+underlying services. 
 
--   Think of this like an open source project. Create a repo on Github, use git for source control, and use README.md to document what you built for the newcomer to your project.
+* Robust and standardized exception handling injected as a WebApi
+global service.
 
--   Our team builds, alongside our customers and partners, systems engineered to run in production. Given this, please organize, design, test, deploy, and document your solution as if you were going to put into production. We completely understand this might mean you can't do as much in the time budget. Be biased for production-ready over features.
+* I implemented manual exploratory testin using the Clien REST VsCode extension. Find the test [here](trips_api/api/src/Docs/TripsTests.http) and set of usefull filter combinations [here](trips_api/api/src/.vscode/settings.json)
 
--   Think out loud in your submission's documentation. Document tradeoffs, the rationale behind your technical choices, or things you would do or do differently if you were able to spend more time on the project or do it again.
+* I built a key feature to let an ‘X-Request-ID’ header that allows
+for telemetry and tracking purposes. If not supplied, it auto-generates it and
+returns it as a response header.
 
--   Our team meets our customers where they are in terms of software engineering platforms, frameworks, tools, and languages. This means you have wide latitude to make choices that express the best solution to the problem given your knowledge and favorite tools. Make sure to document how to get started with your solution in terms of setup.
+* I created a full telemetry service for critical metrics, requests,
+dependencies, and exceptions.
 
-## The Problem
+* Custom Tracing for key query events that logs dynamic query
+objects as a custom dimension on the custom event table within App insights.
 
-Getting around large cities can be quite a hassle, and New York City is no exception. One thing that helps, is being able to predict how long a trip might take and how much that trip might cost. Luckily, NYC provides public data about transportation which includes all of the metrics we need!
+* Sophisticated implementation of a model-first data model and
+repository services. No need for any additional SQL artifacts - like store
+procedures, indexes, or triggers.
 
-Your assignment, is to help us quickly look at transportation fare data for tips between different boroughs in NYC so that when we travel there, it is easier for us to get around.
+* The data-schema model is a fully denormalized table with an
+augmented schema - including columns like weekday, boroughs and zones, and all
+sorts of range bins —sometimes called a class interval- to empower the consumer
+to explore an excellent tool for statistical analysis and creating histograms. 
 
-This is a freeform assignment. You can write a web API that returns a set of trip metrics. You can write a web frontend that visualizes the trips and shows cheapest/fastest options. We also spend a lot of time in the shell, so a CLI that gives us a few options would be great. And don't be constrained by these ideas if you have a better one!
+* I created a polished dev-tests data seed mechanism that allows for
+any developer to get hundreds of thousands of records of actual data loaded in
+their dev environment even before they start coding the first line.
 
-The only requirements for the assignment are:
+* Infrastructure as Code solution for multi-environment deployments
+(Dev/Prod) for key components:
 
-1. We can filter based on yellow cab, green cab, and for-hire vehicle.
-2. We can provide a start and end borough for our trip.
-3. We can filter based on datetime.
-4. The returned data shows some interesting metrics that will help us get around.
-5. Your code is well-tested.
-6. Documentation is provided for how to build and run your code.
+    * App services
 
-Feel free to tackle this problem in a way that demonstrates your expertise of an area -- or takes you out of your comfort zone. For example, if you build Web APIs by day and want to build a frontend to the problem or a completely different language instead, by all means go for it - learning is a core competency in our group. Let us know this context in your solution's documentation.
+    * Sql Database
 
-New York City transportation data is [located here](https://www1.nyc.gov/site/tlc/about/tlc-trip-record-data.page). We've included a copy of the [Jan 2018 data](https://cseboulderinterview.blob.core.windows.net/triprecord/tripdata.zip) as well.
+    * App Insights
 
-Good luck! Please send a link to your solution on Github before the day of your interview so we can review it.
+* Used a NuGet packaged called TinyCvsMapper to create a dynamic model to ready and map any type of csv structure into the Trips data model
+
+* Finally, I created the basic constructs to build a data ingestion
+pipeline which features:
+
+
+* I developed a Python crawler (using Scrapy) that creates a json
+file with the list of all available and relevant .csv files from the official NYC
+city page.
+
+* I developed another Python script that downloads the file from
+their original AWS storage location, splits each into a configurable number of
+smaller files (X rows), and uploads them into an azure storage.
+
+* I created a .net 5 C# Azure function with a Blob trigger that runs
+once it detects one of these CSV files got uploaded, and it pushes the rows
+into the SQL database. At this point, I found what I believe is a bug in the
+Azure function blob trigger function for .net 5 construct and had to stop as I
+ran out of time. I did raise the issue in GitHub here in case you are
+interested. So basically, no luck at loading all the hundreds of thousands of
+records.
+
+
+# Why did I choose this approach
+* My main goal was to maximize the little time I had to enable as many Prod-Like features as possible. I knew choosing asp.net with entity framework model first and Linq query mode was going to allow me to hit the ground running fast and focus in refactoring, abstracting, testing . I also had a clear vision of the data model (de-normalizing and augmenting the model) and knew I needed a powerful way to be able to query on many dimensions 
+# What I would have done different or would've wanted to explore in this scenario:
+* Proper AuthN/AuthZ, keys, managed identity and other security aspects.
+* A graphQL can make a lot of sense to enable a fully searchable dynamic model 
+* A in memory Cachh to hold the most common queries 
+* A proper data ingestion process, probably using Azure Batch to manage and process all the huge files and a tuned Bulk Insert SQL mechanism
+* It can also make sense to implement a Data Lake storage option to enable a more proper Data Warehouse type of analytics in top of the data 
+
+# Known Issues
+* You can only query by one service provider at a time (yellow, green, FHV)
+* I open a gh issue on the azure functions .net blob trigger https://github.com/Azure/Azure-Functions/issues/1881 that blocked me to enable full data ingestion
+* This soluction actually doesn't have any security features.
+
+# Local Dev Setup instructions
+Please review each project README.md
