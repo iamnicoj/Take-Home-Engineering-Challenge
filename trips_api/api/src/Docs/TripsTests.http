@@ -1,0 +1,169 @@
+# General settings
+@hostname = localhost
+@port = 5041
+@host = {{hostname}}:{{port}}
+@contentType = application/json
+
+
+#####
+GET https://{{host}}/api/TripsInfo/
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/all
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Duration
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Fare
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Distance
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Years
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Months
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Weekdays
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/Hours
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/puBoroughs
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/puZones
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/doBoroughs
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+#####
+GET https://{{host}}/api/TripsInfo/doZones
+    ?startdate={{startdate}}
+    &EndDate={{enddate}}
+    &puborough={{puborough}}
+    &doborough={{doborough}}
+    &puzone={{puzone}}
+    &dozone={{dozone}}
+    &provider={{provider}}
+content-type: {{contentType}}
+
+
+#####
+POST https://{{host}}/api/TripsInfo/  HTTP/1.1
+content-type: {{contentType}}
+
+{
+  "PickupDateTime":"2019-01-06T17:16:40",
+  "DropOffDateTime":"2019-01-06T18:19:40",
+  "DropOffTaxiZoneId":12,
+  "PickUpTaxiZoneId":32,
+  "operator": 2,
+  "PassangerCount": 1,
+  "PaymentType": 1,
+  "Distance": 3.3,
+  "fare": 22.1
+}
+
+
+

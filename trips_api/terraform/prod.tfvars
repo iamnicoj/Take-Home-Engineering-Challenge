@@ -1,0 +1,2 @@
+region  = "eastus"
+prefix  = "prod"

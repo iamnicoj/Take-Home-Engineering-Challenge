@@ -1,0 +1,43 @@
+
+# General OpenID docs
+###
+GET https://localhost:5041/swagger/index.html
+
+### 
+GET https://localhost:5041/swagger/v1/swagger.json
+
+
+# CRUD For Taxi Zones
+#####
+GET https://localhost:5041/api/TaxiZones
+content-type: application/json
+
+#####
+GET https://localhost:5041/api/TaxiZones/1
+content-type: application/json
+
+
+#####
+POST https://localhost:5041/api/TaxiZones/  HTTP/1.1
+content-type: application/json
+
+{
+  "TaxiZoneId":1235,
+  "Borough":"Manhattan",
+  "Zone":"East Harlmen 2"
+}
+
+##### 
+PUT https://localhost:5041/api/TaxiZones/1235  HTTP/1.1
+content-type: Application/json
+
+{
+  "TaxiZoneId":1235,
+  "Borough":"Manhattan",
+  "Zone":"East Harlmen"
+}
+
+####
+DELETE https://localhost:5041/api/TaxiZones/0  HTTP/1.1
+
+

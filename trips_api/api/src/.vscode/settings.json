@@ -1,0 +1,83 @@
+{
+    "version": "0.2.0",
+    "rest-client.environmentVariables": {
+        "$shared": {
+            "startdate": "",
+            "enddate": "",
+            "puborough": "",
+            "doborough": "",
+            "puzone": "",
+            "dozone": "",
+            "provider": ""
+        },
+        "nofilters": {
+            "startdate": "",
+            "enddate": "",
+            "puborough": "",
+            "doborough": "",
+            "puzone": "",
+            "dozone": "",
+            "provider": ""
+        },
+        "onlydates": {
+            "startdate": "2016-11-20T11:11:11Z",
+            "enddate": "2018-11-20T11:11:11Z",
+            "puborough": "",
+            "doborough": "",
+            "puzone": "",
+            "dozone": "",
+            "provider": ""
+        }
+        ,
+        "dates&puborough": {
+            "startdate": "2000-11-20T11:11:11Z",
+            "enddate": "2019-11-20T11:11:11Z",
+            "puborough": "manhattan",
+            "doborough": "",
+            "puzone": "",
+            "dozone": "",
+            "provider": ""
+        }
+        ,
+        "dates&doborough": {
+            "startdate": "2000-11-20T11:11:11Z",
+            "enddate": "2019-11-20T11:11:11Z",
+            "puborough": "",
+            "doborough": "brooklyn",
+            "puzone": "",
+            "dozone": "",
+            "provider": ""
+        }
+        ,
+        "dates&provider": {
+            "startdate": "2000-11-20T11:11:11Z",
+            "enddate": "2019-11-20T11:11:11Z",
+            "puborough": "",
+            "doborough": "",
+            "puzone": "",
+            "dozone": "",
+            "provider": "yellow"
+        }
+        ,
+        "dates&puzone": {
+            "startdate": "2000-11-20T11:11:11Z",
+            "enddate": "2019-11-20T11:11:11Z",
+            "puborough": "",
+            "doborough": "",
+            "puzone": "East Harlem South",
+            "dozone": "",
+            "provider": ""
+        }
+        ,
+        "allfilters": {
+            "startdate": "2000-11-20T11:11:11Z",
+            "enddate": "2019-11-20T11:11:11Z",
+            "puborough": "manhattan",
+            "doborough": "East Harlem North",
+            "puzone": "Queens",
+            "dozone": "JFK Airport",
+            "provider": ""
+        }
+
+    }
+}
