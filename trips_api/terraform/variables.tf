@@ -1,11 +1,11 @@
 variable "region" {
   type        = string
   description = "region"
-  default     = ""
+  default     = "eastus"
 }
 
 variable "prefix" {
   type        = string
   description = "prefix"
-  default     = ""
+  default     = "dev"
 }

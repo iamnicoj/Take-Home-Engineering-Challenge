@@ -72,11 +72,11 @@
         "allfilters": {
             "startdate": "2000-11-20T11:11:11Z",
             "enddate": "2019-11-20T11:11:11Z",
-            "puborough": "manhattan",
-            "doborough": "East Harlem North",
-            "puzone": "Queens",
-            "dozone": "JFK Airport",
-            "provider": ""
+            "puborough": "Manhattan",
+            "doborough": "brooklyn",
+            "puzone": "East Harlem South",
+            "dozone": "Park Slope",
+            "provider": "yellow"
         }
 
     }
