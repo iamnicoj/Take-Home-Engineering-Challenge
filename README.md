@@ -76,7 +76,9 @@ records.
 
 
 # Why did I choose this approach
-* My main goal was to maximize the little time I had to enable as many Prod-Like features as possible. I knew choosing asp.net with entity framework model first and Linq query mode was going to allow me to hit the ground running fast and focus in refactoring, abstracting, testing . I also had a clear vision of the data model (de-normalizing and augmenting the model) and knew I needed a powerful way to be able to query on many dimensions 
+* My main goal was to maximize the little time I had to enable as many Prod-Like features as possible. I knew choosing asp.net with entity framework model first and Linq query mode was going to allow me to hit the ground running fast and focus in refactoring, abstracting, testing . I also had a clear vision of the data model (de-normalizing and augmenting the model) and knew I needed a powerful way to be able to query on any dimensions without having the limitations when querying a document type of database or the partition strategy.
+* Additional, I used Python for crawling, spliting, downloading and uploading files, as it is the perfect tool for every day automation tasks.
+* Terraform as my defacto option for automating infraestructure tasks and have a consiste way of planning and verifying the changes before its apply them.
 # What I would have done different or would've wanted to explore in this scenario:
 * Proper AuthN/AuthZ, keys, managed identity and other security aspects.
 * A graphQL can make a lot of sense to enable a fully searchable dynamic model 
