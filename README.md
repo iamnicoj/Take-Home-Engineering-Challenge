@@ -18,14 +18,12 @@ underlying services.
 * Robust and standardized exception handling injected as a WebApi
 global service.
 
-* I implemented manual exploratory testin using the Clien REST VsCode extension. Find the test [here](trips_api/api/src/Docs/TripsTests.http) and set of usefull filter combinations [here](trips_api/api/src/.vscode/settings.json)
-
-* I built a key feature to let an ‘X-Request-ID’ header that allows
-for telemetry and tracking purposes. If not supplied, it auto-generates it and
-returns it as a response header.
+* I implemented a manual exploratory testing approach using the Clien REST VsCode extension. Find the test [here](trips_api/api/src/Docs/TripsTests.http) and set of usefull filter combinations [here](trips_api/api/src/.vscode/settings.json)
 
 * I created a full telemetry service for critical metrics, requests,
 dependencies, and exceptions.
+
+* I built a key feature to accept an ‘X-Request-ID’ HTTP header on any request that is injected as part of the custom telemetry and enables individual tracking. If not supplied, it auto-generates it and returns it as a response header.
 
 * Custom Tracing for key query events that logs dynamic query
 objects as a custom dimension on the custom event table within App insights.
@@ -52,7 +50,7 @@ their dev environment even before they start coding the first line.
 
     * App Insights
 
-* Used a NuGet packaged called TinyCvsMapper to create a dynamic model to ready and map any type of csv structure into the Trips data model
+* I used a NuGet packaged called TinyCvsMapper to create a dynamic csv mapping mechanimos to be able to read any type of csv structure into the Trips data model
 
 * Finally, I created the basic constructs to build a data ingestion
 pipeline which features:
@@ -76,9 +74,9 @@ records.
 
 
 # Why did I choose this approach
-* My main goal was to maximize the little time I had to enable as many Prod-Like features as possible. I knew choosing asp.net with entity framework model first and Linq query mode was going to allow me to hit the ground running fast and focus in refactoring, abstracting, testing . I also had a clear vision of the data model (de-normalizing and augmenting the model) and knew I needed a powerful way to be able to query on any dimensions without having the limitations when querying a document type of database or the partition strategy.
-* Additional, I used Python for crawling, spliting, downloading and uploading files, as it is the perfect tool for every day automation tasks.
-* Terraform as my defacto option for automating infraestructure tasks and have a consiste way of planning and verifying the changes before its apply them.
+* My main goal was to maximize the limited time I had to enable as many Prod-Like features as possible. I knew choosing asp.net with entity framework model first and a Linq query mode was going to allow me to hit the ground running fast and focus in refactoring, abstracting and testing . I also had a clear vision of the data model (de-normalizing and augmenting it) and knew I needed a powerful way to be able to query on any data dimensions without having the limitations when querying a document type database or worrying about the partition strategy.
+* Additional, I used Python for crawling, spliting, downloading and uploading files, as it is a compact lenguage that with just few lines of code is the perfect tool for every day automation tasks.
+* Terraform as my defacto option for automating infraestructure tasks and have a consistent way of planning and verifying the changes before its apply them.
 # What I would have done different or would've wanted to explore in this scenario:
 * Proper AuthN/AuthZ, keys, managed identity and other security aspects.
 * A graphQL can make a lot of sense to enable a fully searchable dynamic model 
