@@ -82,9 +82,9 @@ records.
 # What I would have done different or would've wanted to explore in this scenario:
 * Proper AuthN/AuthZ, keys, managed identity and other security aspects.
 * A graphQL can make a lot of sense to enable a fully searchable dynamic model 
-* A in memory Cachh to hold the most common queries 
+* An in-memory Cache to preload and hold the most common used queries
 * A proper data ingestion process, probably using Azure Batch to manage and process all the huge files and a tuned Bulk Insert SQL mechanism
-* It can also make sense to implement a Data Lake storage option to enable a more proper Data Warehouse type of analytics in top of the data 
+* It can also make sense to implement a Data Lake storage option to enable an alternative Bid data/ data warehouse type of analytics in top of the monthly millions of records 
 
 # Known Issues
 * You can only query by one service provider at a time (yellow, green, FHV)
