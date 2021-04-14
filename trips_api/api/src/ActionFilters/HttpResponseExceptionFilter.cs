@@ -17,10 +17,10 @@ namespace TripsAPI.ActionFilters
                 error.StatusCode = 400;
                 error.Message = "Invalid Query Parameters.";
             }
-            else
+            else 
             {
                 error.StatusCode = 500;
-                error.Message = "Invalid Query Parameters.";
+                error.Message = "Internal Server Error.";
             }
 
             context.Result = new JsonResult(error);

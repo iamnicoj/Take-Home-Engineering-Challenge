@@ -16,7 +16,7 @@ namespace TripsDataIngetion
 {    public static class nicos_nyctrips_ingestion
     {
         [Function("nicos_nyctrips_ingestion")]
-        public static async Task Run([BlobTrigger("datatoingest/{name}", Connection = "nicostripsdata_STORAGE")] Stream myBlob, string name,
+        public static async Task Run([BlobTrigger("datatoingest/{name}", Connection = "nicostripsdata_STORAGE")] string myBlob, string name,
             ILogger logger)
             
         {
@@ -25,11 +25,9 @@ namespace TripsDataIngetion
             // validate type of file and ft to use 
             if (!name.EndsWith(".csv"))
             {
-                logger.LogInformation($"Blob '{name}' doesn't have the .csv extension. Skipping processing.");
                 return;
             }
 
-            logger.LogInformation($"Blob '{name}' found. Uploading to Azure SQL");
 
             // determine the type of file to load
             ServiceType provider = ServiceType.None;
@@ -39,8 +37,8 @@ namespace TripsDataIngetion
             CsvParser<TripInfo> csvParser = new CsvParser<TripInfo>(csvParserOptions, csvMapper);
             CsvReaderOptions csvReaderOptions = new CsvReaderOptions(new[] { Environment.NewLine });
 
-            var result = csvParser.ReadFromStream( (Stream) myBlob, ASCIIEncoding.ASCII).ToList();
-            // var result = csvParser.ReadFromString( csvReaderOptions, myBlob).ToList();
+            // var result = csvParser.ReadFromStream( (Stream) myBlob, ASCIIEncoding.ASCII).ToList();
+            var result = csvParser.ReadFromString( csvReaderOptions, myBlob).ToList();
 
             string azureSQLConnectionString = Environment.GetEnvironmentVariable("AzureSQL");
 
@@ -63,25 +61,19 @@ namespace TripsDataIngetion
                                 SqlHelper.FillParameters(cmd, tx.Result);
 
                                 var rows = await cmd.ExecuteNonQueryAsync();
-                                if (rows != 1)
-                                    logger.LogError(String.Format("Row for customer {0} was not added to the database", counter));
+                                if (rows != 1) {
+                                    // Log error 
+                                }
                                 else saved++;
                                 counter++;
                             }
-                            catch (SqlException se)
+                            catch 
                             {
-                                logger.LogError($"Exception Trapped: {se.Message}");
-                            }
-                            catch (Exception ex)
-                            {
-                                logger.LogError($"Exception Trapped: {ex.Message}");
                             }
                             finally
                             {
                             }
                         }
-                        logger.LogInformation($"Blob '{name}' uploaded");
-                        logger.LogInformation($"{saved} records added");
                     }
                     conn?.Close();
                 }

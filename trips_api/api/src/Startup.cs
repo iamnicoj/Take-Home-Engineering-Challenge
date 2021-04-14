@@ -34,12 +34,12 @@ namespace TripsAPI
             
             services.AddApplicationInsightsTelemetry();
 
-            services.Configure<TelemetryConfiguration>(
-                (o) => {
-                o.InstrumentationKey = "123";
-                o.DisableTelemetry = true;
-                o.TelemetryInitializers.Add(new OperationCorrelationTelemetryInitializer());
-                });
+            // services.Configure<TelemetryConfiguration>(
+            //     (o) => {
+            //     o.InstrumentationKey = "123";
+            //     o.DisableTelemetry = true;
+            //     o.TelemetryInitializers.Add(new OperationCorrelationTelemetryInitializer());
+            //     });
 
             // This code adds other services for your application.
             services.AddMvc();
